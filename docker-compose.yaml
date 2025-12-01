@@ -6,17 +6,33 @@ services:
       target: development
     command: pnpm run start:dev reservations
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - .:/usr/src/app
     environment:
       - MONGODB_URI=mongodb://mongo:27017/dreamer
     depends_on:
       - mongo
+
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    command: pnpm run start:dev auth
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/dreamer
+    depends_on:
+      - mongo
+
   mongo:
     image: mongo:latest
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - mongo_data:/data/db
 
