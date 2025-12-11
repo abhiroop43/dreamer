@@ -9,8 +9,10 @@ services:
       - '3000:3000'
     volumes:
       - .:/usr/src/app
-    environment:
-      - MONGODB_URI=mongodb://mongo:27017/dreamer
+    # environment:
+    #   - MONGODB_URI=mongodb://mongo:27017/dreamer
+    env_file:
+      - ./apps/reservations/.env
     depends_on:
       - mongo
 
@@ -24,8 +26,10 @@ services:
       - '3000:3000'
     volumes:
       - .:/usr/src/app
-    environment:
-      - MONGODB_URI=mongodb://mongo:27017/dreamer
+    # environment:
+    #   - MONGODB_URI=mongodb://mongo:27017/dreamer
+    env_file:
+      - ./apps/auth/.env
     depends_on:
       - mongo
 
